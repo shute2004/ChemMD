@@ -52,7 +52,7 @@ function renderAtom(atom, positions, displayMode, visibility, warningAtoms = new
   return group;
 }
 
-function trimBondForLabels(from, to, atomFrom, atomTo, displayMode, visibility) {
+export function trimBondForLabels(from, to, atomFrom, atomTo, displayMode, visibility) {
   if (displayMode !== "publish") return { from, to };
   const dx = to[0] - from[0];
   const dy = to[1] - from[1];
@@ -65,7 +65,7 @@ function trimBondForLabels(from, to, atomFrom, atomTo, displayMode, visibility) 
 }
 
 function labelTrim(atom) { if (!atom) return 0; if (atom.isComponent) return Math.max(80, `[-${atom.label}-]${atom.repeat || "n"}`.length * 9) / 2 + 2; return atom.label.length >= 2 ? 22 : 17; }
-function bondOffsets(type, x1, y1, x2, y2, displayMode) {
+export function bondOffsets(type, x1, y1, x2, y2, displayMode) {
   if (type === "single" || type === "dotted") return [{ x: 0, y: 0 }];
   const dx = x2 - x1; const dy = y2 - y1; const length = Math.hypot(dx, dy) || 1; const distance = displayMode === "publish" ? 3 : 5;
   const normal = { x: (-dy / length) * distance, y: (dx / length) * distance };
