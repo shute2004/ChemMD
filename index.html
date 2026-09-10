@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChemMD — Chemical Structure Editor</title>
+    <meta name="description" content="A lightweight text-and-SVG chemical structure editor." />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="sidebar" aria-label="File explorer">
+        <div class="sidebar-header"><strong>EXPLORER</strong><button id="new-file-btn" type="button">+</button></div>
+        <ul id="files-list" class="files-list"></ul>
+      </aside>
+
+      <section class="editor-pane" aria-label="ChemMD source editor">
+        <div class="pane-header">
+          <div><h1>ChemMD</h1><p>Topology in text. Geometry by hand.</p></div>
+          <button id="reset-layout" type="button">Auto arrange</button>
+        </div>
+        <textarea id="source" spellcheck="false" aria-label="ChemMD source"></textarea>
+        <div id="errors" class="errors" aria-live="polite"></div>
+        <div id="warnings" class="warnings" aria-live="polite"></div>
+      </section>
+
+      <section class="preview-pane" aria-label="Chemical structure preview">
+        <div class="toolbar">
+          <span id="stats">0 atoms, 0 bonds</span>
+          <div class="tools">
+            <button id="edit-mode" class="is-active" type="button">Edit</button>
+            <button id="publish-mode" type="button">Preview</button>
+            <button id="fit-view" type="button">Fit</button>
+            <label><input id="show-grid" type="checkbox" checked /> Grid</label>
+            <label><input id="show-skeletal" type="checkbox" checked /> Skeletal</label>
+            <input id="zoom-range" type="range" min="25" max="300" value="100" step="5" aria-label="Zoom percent" />
+            <span id="zoom-label">100%</span>
+            <button id="download-code" type="button">.chemmd</button>
+            <button id="download-svg" type="button">SVG</button>
+            <button id="download-png" type="button">PNG</button>
+          </div>
+        </div>
+        <svg id="canvas" viewBox="0 0 900 620" role="img" aria-label="ChemMD SVG preview">
+          <defs><pattern id="grid-pattern" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#d8ddd5" stroke-width="1" /></pattern></defs>
+          <rect id="grid" width="900" height="620" fill="url(#grid-pattern)" />
+          <g id="viewport"><g id="bonds"></g><g id="atoms"></g></g>
+        </svg>
+      </section>
+    </main>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

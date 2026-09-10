@@ -1,0 +1,42 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f3ee;
+  --surface: #fbfaf7;
+  --fg: #20231f;
+  --muted: #667064;
+  --border: #d7d4ca;
+  --accent: #2f6f5b;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); overflow: hidden; }
+button, textarea, input { font: inherit; }
+.shell { display: grid; grid-template-columns: 220px minmax(340px, .9fr) minmax(460px, 1.1fr); height: 100vh; }
+.sidebar { background: #ebe9e3; border-right: 1px solid var(--border); overflow: auto; }
+.sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border); font-size: 12px; }
+.files-list { list-style: none; margin: 0; padding: 8px 0; }
+.file-item { padding: 7px 16px; cursor: pointer; font-size: 13px; }
+.file-item:hover { background: rgba(0,0,0,.04); }
+.file-item.is-active { background: #dcebe4; color: #173d31; font-weight: 600; }
+.editor-pane, .preview-pane { min-width: 0; padding: 20px; }
+.editor-pane { display: flex; flex-direction: column; gap: 14px; background: var(--surface); border-right: 1px solid var(--border); }
+.preview-pane { display: flex; flex-direction: column; gap: 14px; background: #eef0eb; }
+.pane-header, .toolbar, .tools { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+h1, p { margin: 0; } h1 { font-size: 24px; } p, .toolbar { color: var(--muted); font-size: 13px; }
+button { border: 1px solid #bfc7bb; border-radius: 6px; background: #fff; padding: 7px 10px; cursor: pointer; }
+button:hover { background: #eef2ea; } button.is-active { border-color: var(--accent); background: #dcebe4; color: #173d31; }
+textarea { flex: 1; min-height: 420px; resize: none; border: 1px solid #cfd5cc; border-radius: 8px; padding: 16px; background: #20231f; color: #f6f2e8; line-height: 1.5; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.errors, .warnings { min-height: 20px; white-space: pre-wrap; font-size: 12px; }
+.errors { color: #bd2f27; } .warnings { color: #8b6e0c; }
+svg { width: 100%; flex: 1; min-height: 480px; border: 1px solid #c8cec4; border-radius: 8px; background: #fafbf8; touch-action: none; }
+.bond line { stroke: #1f2521; stroke-linecap: round; stroke-width: 4; }
+.bond-dotted line { stroke-dasharray: 2 12; }
+.atom { cursor: grab; } .atom circle { fill: #fffdf8; stroke: #1f2521; stroke-width: 2; }
+.atom circle.atom-warning { fill: #fff3e0; stroke: #c45e00; stroke-width: 2.5; }
+.atom-label { fill: #1f2521; font-size: 18px; font-weight: 750; text-anchor: middle; user-select: none; }
+.atom-o { fill: #c53b2f; } .atom-n { fill: #2f63b7; } .atom-s { fill: #9b7b0f; } .atom-cl, .atom-f, .atom-br, .atom-i { fill: #13835b; }
+.atom-id { fill: var(--muted); font-size: 11px; text-anchor: middle; }
+.publication .bond line { stroke-width: 1.8; stroke-linecap: butt; }
+.publication .atom { cursor: default; } .publication .atom-bg { fill: #fff; stroke: none; }
+.publication .atom-label { font-family: Arial, sans-serif; font-size: 17px; font-weight: 600; paint-order: stroke; stroke: #fff; stroke-width: 7px; stroke-linejoin: round; }
+@media (max-width: 1000px) { body { overflow: auto; } .shell { display: flex; flex-direction: column; height: auto; } .sidebar { max-height: 180px; } .editor-pane { min-height: 520px; border-right: 0; border-bottom: 1px solid var(--border); } .preview-pane { min-height: 620px; } }
