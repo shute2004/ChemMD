@@ -35,3 +35,21 @@ test("publication visibility hides ring-carbon labels and carbon-bound hydrogens
   assert.equal(visibility.hiddenAtoms.has("4"), true);
   assert.equal(visibility.hiddenAtoms.has("6"), false);
 });
+
+test("parses imports without claiming cross-file resolution", () => {
+  const parsed = parseChemMD(`imports:\n  - Styrene from "Styrene.chemmd"\n`);
+  assert.deepEqual(parsed.imports, [{ name: "Styrene", path: "Styrene.chemmd" }]);
+  assert.equal(parsed.errors.length, 0);
+});
+
+test("parses component declarations and repeat counts", () => {
+  const parsed = parseChemMD(`components:\n  Polymer1: [Styrene] n=100\n`);
+  assert.deepEqual(parsed.atoms, [{ id: "Polymer1", label: "Styrene", isComponent: true, repeat: "100" }]);
+  assert.equal(parsed.errors.length, 0);
+});
+
+test("parses named ports", () => {
+  const parsed = parseChemMD(`atoms:\n  C1: C\n\nports:\n  head: C1\n  tail: C1\n`);
+  assert.deepEqual(parsed.ports, { head: "C1", tail: "C1" });
+  assert.equal(parsed.errors.length, 0);
+});
